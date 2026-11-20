@@ -1,0 +1,93 @@
+name: daily_notes
+description: Hospital daily notes management system
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Localization
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
+  
+  # State management
+  flutter_riverpod: ^2.4.9
+  riverpod_annotation: ^2.3.3
+  
+  # Database
+  sqflite: ^2.3.0
+  path: ^1.8.3
+  
+  # Storage
+  shared_preferences: ^2.2.2
+  flutter_secure_storage: ^8.0.0
+  path_provider: ^2.1.1
+  
+  # Navigation
+  go_router: ^13.0.0
+  
+  # UI Components
+  flutter_svg: ^2.0.7
+  cached_network_image: ^3.3.0
+  
+  # Date/Time
+  date_format: ^2.0.7
+  
+  # File handling
+  file_picker: ^5.3.3
+  open_file: ^3.2.1
+  
+  # Image handling
+  image_picker: ^1.0.4
+  image_cropper: ^5.0.1
+  
+  # Notifications
+  flutter_local_notifications: ^16.1.2
+  
+  # Pull to refresh
+  pull_to_refresh: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.8
+  riverpod_generator: ^2.3.9
+  json_serializable: ^6.7.1
+  freezed: ^2.4.6
+  freezed_annotation: ^2.4.1
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/fonts/
+    - assets/icons/
+    - assets/images/
+  
+  fonts:
+    - family: NotoSansArabic
+      fonts:
+        - asset: assets/fonts/NotoSansArabic/NotoSansArabic-Regular.ttf
+        - asset: assets/fonts/NotoSansArabic/NotoSansArabic-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/NotoSansArabic/NotoSansArabic-Bold.ttf
+          weight: 700
+    - family: SFProDisplay
+      fonts:
+        - asset: assets/fonts/SFPro/SFProDisplay-Regular.ttf
+        - asset: assets/fonts/SFPro/SFProDisplay-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/SFPro/SFProDisplay-Bold.ttf
+          weight: 700
+    - family: SFProText
+      fonts:
+        - asset: assets/fonts/SFPro/SFProText-Regular.ttf
+        - asset: assets/fonts/SFPro/SFProText-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/SFPro/SFProText-Bold.ttf
+          weight: 700
