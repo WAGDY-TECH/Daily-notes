@@ -1,0 +1,113 @@
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/build/
+**/ios/.generated/
+**/android/.idea/
+**/android/app/build/
+**/android/app/.apt_generated/
+**/android/app/.apt_generated_dir/
+**/android/app/src/main/java/
+**/android/.gradle/
+**/android/build/
+**/android/gradle/
+**/android/gradle.properties
+**/android/local.properties
+**/android/.idea/
+**/android/.idea/libraries/
+**/android/.idea/modules.xml
+**/android/.idea/runConfigurations.xml
+**/android/.idea/workspace.xml
+**/android/.idea/.name
+**/android/.idea/caches/
+**/android/.idea/assetWizardSettings.xml
+**/android/.idea/codeTemplates/
+**/android/.idea/inspectionProfiles/
+**/android/.idea/libraries/
+**/android/.idea/options/
+**/android/.idea/scopes/
+**/android/.idea/templates/
+**/android/.idea/vcs.xml
+**/android/.idea/copyright/
+
+# Flutter build
+**/build/
+**/web/build/
+
+# Generated files
+**/lib/generated/
+**/lib/*.freezed.dart
+**/lib/*.g.dart
+**/lib/*.gr.dart
+
+# IDE related
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# macOS
+.DS_Store
+*.pem
+
+# Local history
+.history/
+
+# Flutter test
+.coverage/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+*.iml
+*.ipr
+*.iws
+
+# Dart
+.dart_tool/
+
+# Pub
+.packages
+pubspec.lock
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+.cache/
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# Asset cache
+.flutter-plugins-dependencies
+
+# Android
+*.keystore
+*.jks
+
+# iOS
+*.mobileprovision
+*.p12
+*.p8
+*.key
+*.cer
+*.provisionprofile
+
+# Local database
+*.db
+*.sqlite
+*.sqlite3
