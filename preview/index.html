@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Notes - Preview</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans Arabic',sans-serif;background:#171717;color:#fff;min-height:100vh}
+.header{background:#171717;padding:15px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #374151}
+.title{font-size:20px;font-weight:bold}
+.main{padding:20px;padding-bottom:80px}
+.card{background:#1F2937;border-radius:8px;padding:16px;margin-bottom:16px;border:1px solid #374151}
+.card-title{font-size:16px;font-weight:bold;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card-icon{width:36px;height:36px;background:#FFFC00;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#171717}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.quick-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;cursor:pointer;border-radius:4px}
+.quick-item:hover{background:rgba(255,252,0,0.1)}
+.quick-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:4px;font-size:20px}
+.quick-icon.work{background:rgba(59,130,246,0.2);color:#3B82F6}
+.quick-icon.notes{background:rgba(16,185,129,0.2);color:#10B981}
+.quick-icon.tasks{background:rgba(245,158,11,0.2);color:#F59E0B}
+.quick-icon.memories{background:rgba(239,68,68,0.2);color:#EF4444}
+.quick-label{font-size:11px;font-weight:500;text-align:center}
+.recent-item{display:flex;align-items:center;gap:12px;padding:12px;background:#1F2937;border-radius:8px;margin-bottom:8px;border:1px solid #374151}
+.recent-icon{width:36px;height:36px;background:rgba(255,252,0,0.2);border-radius:4px;display:flex;align-items:center;justify-content:center;color:#FFFC00}
+.recent-info{flex:1}
+.recent-title{font-size:14px;font-weight:500}
+.recent-subtitle{font-size:12px;color:#9CA3AF}
+.badge{padding:4px 8px;border-radius:12px;font-size:10px;font-weight:500}
+.badge.in-progress{background:#DBEAFE;color:#1E40AF}
+.badge.assigned{background:#DBEAFE;color:#1E40AF}
+.badge.completed{background:#D1FAE5;color:#065F46}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#171717;border-top:1px solid #374151;display:flex;justify-content:space-around;padding:8px 0;z-index:100}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px;cursor:pointer;color:#9CA3AF}
+.nav-item.active{color:#FFFC00}
+.nav-item i{font-size:20px}
+.nav-item span{font-size:11px}
+.fab{position:fixed;bottom:70px;right:20px;width:56px;height:56px;background:#FFFC00;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;color:#171717;z-index:99}
+.splash{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;text-align:center}
+.logo{width:120px;height:120px;background:#FFFC00;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 10px 30px rgba(255,252,0,0.3)}
+.logo i{font-size:60px;color:#171717}
+.splash-title{font-size:28px;font-weight:bold;margin-bottom:8px}
+.splash-subtitle{font-size:14px;color:#9CA3AF;margin-bottom:30px}
+.spinner{width:40px;height:40px;border:4px solid #374151;border-top-color:#FFFC00;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn 0.3s ease forwards}
+.hidden{display:none!important}
+.moods{display:flex;gap:12px;flex-wrap:wrap}
+.mood{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px;cursor:pointer;border-radius:4px}
+.mood:hover{background:rgba(255,252,0,0.1)}
+.mood i{font-size:24px}
+.mood span{font-size:12px;color:#9CA3AF}
+.mood.active i{color:#F59E0B}
+.stats{display:flex;justify-content:space-between;align-items:center;margin:12px 0}
+.stat{display:flex;align-items:center;gap:4px;font-size:12px;color:#9CA3AF}
+.stat i{color:#3B82F6}
+.add-btn{display:inline-flex;align-items:center;gap:8px;background:none;border:2px solid #FFFC00;color:#FFFC00;padding:8px 16px;border-radius:4px;cursor:pointer;font-size:14px;font-weight:500;margin-top:12px;align-self:flex-start}
+.add-btn:hover{background:#FFFC00;color:#171717}
+.section-header{display:flex;justify-content:space-between;align-items:center;margin:16px 0 12px 0}
+.section-title{font-size:16px;font-weight:bold}
+.view-all{background:none;border:none;color:#FFFC00;font-size:14px;cursor:pointer}
+</style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<!-- Splash Screen -->
+<div id="splash" class="splash">
+  <div class="logo"><i>note_alt</i></div>
+  <h1 class="splash-title">يومياتي</h1>
+  <p class="splash-subtitle">نظام إدارة يوميات المستشفى</p>
+  <div class="spinner"></div>
+</div>
+
+<!-- Main App -->
+<div id="main" class="hidden">
+  <!-- Header -->
+  <header class="header">
+    <button onclick="toggleMenu()">☰</button>
+    <h1 class="title">الرئيسية</h1>
+    <div><button>🔍</button><button>🔔</button><button>👤</button></div>
+  </header>
+  
+  <!-- Main Content -->
+  <main class="main">
+    <!-- Daily Summary Card -->
+    <div class="card fade-in">
+      <div class="card-title"><div class="card-icon">📅</div><span>اليوم</span></div>
+      <div id="date" style="color:#9CA3AF;font-size:14px;margin-bottom:16px"></div>
+      <div class="moods">
+        <div class="mood active" onclick="selectMood(this)"><i>sentiment_very_satisfied</i><span>سعيد</span></div>
+        <div class="mood" onclick="selectMood(this)"><i>sentiment_neutral</i><span>محايد</span></div>
+        <div class="mood" onclick="selectMood(this)"><i>sentiment_very_dissatisfied</i><span>حزين</span></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><i>energy_savings</i><span>طاقة: 8/10</span></div>
+        <div class="stat"><i>bedtime</i><span>نوم: 7س</span></div>
+      </div>
+      <button class="add-btn" onclick="alert('إضافة مدونة يومية')"><i>add</i><span>إضافة مدونة يومية</span></button>
+    </div>
+    
+    <!-- Quick Access Grid -->
+    <div class="card fade-in">
+      <h2 class="card-title">الوصول السريع</h2>
+      <div class="quick-grid">
+        <div class="quick-item" onclick="alert('أوامر العمل')"><div class="quick-icon work">🔧</div><span class="quick-label">أوامر العمل</span></div>
+        <div class="quick-item" onclick="alert('ملاحظاتي')"><div class="quick-icon notes">📝</div><span class="quick-label">ملاحظاتي</span></div>
+        <div class="quick-item" onclick="alert('المهام')"><div class="quick-icon tasks">✅</div><span class="quick-label">المهام</span></div>
+        <div class="quick-item" onclick="alert('ذكرياتي')"><div class="quick-icon memories">📚</div><span class="quick-label">ذكرياتي</span></div>
+        <div class="quick-item" onclick="alert('اليوميات')"><div class="quick-icon work">📅</div><span class="quick-label">اليوميات</span></div>
+        <div class="quick-item" onclick="alert('الفنيين')"><div class="quick-icon notes">👨‍🔧</div><span class="quick-label">الفنيين</span></div>
+        <div class="quick-item" onclick="alert('الأقسام')"><div class="quick-icon tasks">🏢</div><span class="quick-label">الأقسام</span></div>
+        <div class="quick-item" onclick="alert('المعدات')"><div class="quick-icon memories">🔨</div><span class="quick-label">المعدات</span></div>
+      </div>
+    </div>
+    
+    <!-- Recent Items -->
+    <div class="fade-in">
+      <div class="section-header">
+        <h2 class="section-title">الأخرى</h2>
+        <button class="view-all">عرض الكل</button>
+      </div>
+      
+      <h3 style="font-size:14px;font-weight:600;margin:16px 0 12px 0">أوامر العمل الأخيرة</h3>
+      <div class="recent-item">
+        <div class="recent-icon">🔧</div>
+        <div class="recent-info">
+          <div class="recent-title">صيانة جهاز الأشعة</div>
+          <div class="recent-subtitle">X-Ray Machine Maintenance</div>
+        </div>
+        <span class="badge in-progress">في تقدم</span>
+      </div>
+      <div class="recent-item">
+        <div class="recent-icon">🔧</div>
+        <div class="recent-info">
+          <div class="recent-title">صيانة جهاز المختبر</div>
+          <div class="recent-subtitle">Lab Equipment Maintenance</div>
+        </div>
+        <span class="badge assigned">مخصص</span>
+      </div>
+      
+      <h3 style="font-size:14px;font-weight:600;margin:16px 0 12px 0">الملاحظات الأخيرة</h3>
+      <div class="recent-item">
+        <div class="recent-icon">📝</div>
+        <div class="recent-info">
+          <div class="recent-title">ملاحظة صيانة دورية</div>
+          <div class="recent-subtitle">Periodic Maintenance Note</div>
+        </div>
+        <span class="badge in-progress">فنية</span>
+      </div>
+      <div class="recent-item">
+        <div class="recent-icon">📝</div>
+        <div class="recent-info">
+          <div class="recent-title">تذكرة مهمة</div>
+          <div class="recent-subtitle">Important Reminder</div>
+        </div>
+        <span class="badge completed">عامة</span>
+      </div>
+      
+      <h3 style="font-size:14px;font-weight:600;margin:16px 0 12px 0">المهام الأخيرة</h3>
+      <div class="recent-item">
+        <div class="recent-icon">✅</div>
+        <div class="recent-info">
+          <div class="recent-title">فحص جهاز</div>
+          <div class="recent-subtitle">Equipment Check</div>
+        </div>
+        <span class="badge completed">منته</span>
+      </div>
+      <div class="recent-item">
+        <div class="recent-icon">✅</div>
+        <div class="recent-info">
+          <div class="recent-title">صيانة دورية</div>
+          <div class="recent-subtitle">Periodic Maintenance</div>
+        </div>
+        <span class="badge in-progress">في انتظار</span>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <div class="nav-item active" onclick="showScreen('home')"><i>note_alt</i><span>يومياتي</span></div>
+    <div class="nav-item" onclick="showScreen('memories')"><i>book</i><span>ذكرياتي</span></div>
+    <div class="nav-item" onclick="showScreen('tasks')"><i>task</i><span>المهام</span></div>
+    <div class="nav-item" onclick="showScreen('search')"><i>search</i><span>البحث</span></div>
+  </nav>
+  
+  <!-- Floating Action Button -->
+  <button class="fab" onclick="showQuickActions()">+</button>
+</div>
+
+<script>
+// Set current date
+function updateDate() {
+  const now = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('date').textContent = now.toLocaleDateString('ar-EG', options);
+}
+
+// Select mood
+function selectMood(element) {
+  document.querySelectorAll('.mood').forEach(m => m.classList.remove('active'));
+  element.classList.add('active');
+}
+
+// Show screen
+function showScreen(screen) {
+  alert('تم فتح شاشة: ' + screen);
+}
+
+// Show quick actions
+function showQuickActions() {
+  alert('إضافة جديد: ملاحظة / مهمة / ذكرى / أمر عمل');
+}
+
+// Toggle menu
+function toggleMenu() {
+  alert('قائمة التنقل');
+}
+
+// Initialize
+window.addEventListener('load', function() {
+  updateDate();
+  setTimeout(() => {
+    document.getElementById('splash').classList.add('hidden');
+    document.getElementById('main').classList.remove('hidden');
+  }, 2000);
+});
+</script>
+</body>
+</html>
